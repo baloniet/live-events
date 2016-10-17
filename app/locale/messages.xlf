@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5a48fd662ca2bf4b7721bd2f3bb68a2f89bf2159" datatype="html">
+        <source>My First Angular App</source>
+        <target/>
+        <note priority="1" from="description"> Application title</note>
+        <note priority="1" from="meaning">User welcome</note>
+      </trans-unit>
+      <trans-unit id="024886ca34a6f309e3e51c2ed849320592c3faaa" datatype="html">
+        <source>User name</source>
+        <target/>
+        <note priority="1" from="description">User name</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
