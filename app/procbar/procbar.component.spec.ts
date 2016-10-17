@@ -1,22 +1,22 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { NavbarComponent } from './navbar.component';
+import { ProcbarComponent } from './procbar.component';
 
-describe('a navbar component', () => {
-	let component: NavbarComponent;
+describe('a procbar component', () => {
+	let component: ProcbarComponent;
 
 	// register all needed dependencies
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
-				NavbarComponent
+				ProcbarComponent
 			]
 		});
 	});
 
 	// instantiation through framework injection
-	beforeEach(inject([NavbarComponent], (NavbarComponent) => {
-		component = NavbarComponent;
+	beforeEach(inject([ProcbarComponent], (ProcbarComponent) => {
+		component = ProcbarComponent;
 	}));
 
 	it('should have an instance', () => {
