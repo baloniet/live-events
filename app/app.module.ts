@@ -7,9 +7,11 @@ import { ProcbarComponent} from './procbar/procbar.component';
 
 import { GenlistComponent} from './ui/genlist/genlist.component';
 
+
+
 import { RouterModule }   from '@angular/router';
 
-import { ValuesPipe, KeysPipe } from './shared/ValuesPipe';
+import { ValuesPipe, KeysPipe } from './shared/valuesPipe';
 
 @NgModule({
   imports: [ 

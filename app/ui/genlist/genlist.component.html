@@ -1,24 +1,36 @@
 <div class="container">
-  <!-- Default panel contents -->
-  <div class="panel-heading table-bordered"><h3>Urejanje podatkov {{id.id}}</h3></div>
+	<div *ngIf="tableLabels" class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading table-bordered">
+			<h3>{{title}} {{tableLabels.tableTitle}}</h3>
+            <button class="btn btn-link btn-xs" >  
+            <i class="fa fa-plus"></i><span> Dodaj nov zapis</span>
+                        </button>
+		</div>
+		
+		<div >
+			<!-- Table -->
+			<div *ngIf="data[0]">
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr class="active h4">
+							<th *ngFor="let d of data[0] | keys">{{tableLabels[d]}}</th>
+							<th></th>
+						</tr>
 
-  <!-- Table -->
-  <table class="table table-hover table-bordered">
-      <thead>
-        <tr class="active h4">
-            <th *ngFor="let d of data[0] | keys">{{d}}</th>
-            <th></th>
-        </tr>
-                  
-      </thead>
-      <tbody>
-        <tr *ngFor="let d of data">
-            <td *ngFor="let i of d | values">{{i}}</td>
-            <td>
-                <i class="glyphicon glyphicon-edit clickable" aria-hidden="true"></i><span>&nbsp;</span>  
-                <i class="glyphicon glyphicon-remove clickable" aria-hidden="true"></i>
-            </td>
-        </tr>
-      </tbody> 
-  </table>
+					</thead>
+					<tbody>
+						<tr *ngFor="let d of data">
+							<td *ngFor="let i of d | values">{{i}}</td>
+							<td>
+								<i class="glyphicon glyphicon-edit clickable" aria-hidden="true"></i><span>&nbsp;</span>
+								<i class="glyphicon glyphicon-remove clickable" aria-hidden="true"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!tableLabels">Šifrant ne obstaja</div>
 </div>
