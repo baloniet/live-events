@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
 	selector: 'navbar',
@@ -8,4 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
 	ngOnInit() { }
+
+	constructor(private router: Router){
+
+	}
+	onSelect(link) {
+    	this.router.navigate(link);
+    }
 }

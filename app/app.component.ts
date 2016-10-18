@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'live-events',
-    template: '<navbar></navbar><procbar></procbar>',
+    template: '<navbar></navbar><router-outlet></router-outlet>'
 
 })
 export class AppComponent { }
+//<procbar></procbar>
