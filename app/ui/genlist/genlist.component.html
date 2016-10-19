@@ -3,12 +3,12 @@
 		<!-- Default panel contents -->
 		<div class="panel-heading table-bordered">
 			<h3>{{title}} {{tableLabels.tableTitle}}</h3>
-            <button class="btn btn-link btn-xs" >  
+			<button class="btn btn-link btn-xs" (click)="newRecord(tableLabels.newRecord)">  
             <i class="fa fa-plus"></i><span> Dodaj nov zapis</span>
                         </button>
 		</div>
-		
-		<div >
+
+		<div>
 			<!-- Table -->
 			<div *ngIf="data[0]">
 				<table class="table table-hover table-bordered">

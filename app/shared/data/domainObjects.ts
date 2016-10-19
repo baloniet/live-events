@@ -40,6 +40,11 @@ export class Education {
 }
 
 export class Person {
+    constructor(personId, firstName, lastName) {
+        this.personId = personId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
     personId: number;
     firstName: string;
     lastName: string;

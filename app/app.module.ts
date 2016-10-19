@@ -24,7 +24,7 @@ import { ValuesPipe, KeysPipe } from './shared/valuesPipe';
       { path: '', component: ProcbarComponent },
     ]),
     FormsModule, ReactiveFormsModule ],
-  declarations: [AppComponent, NavbarComponent, ProcbarComponent, GenlistComponent, ValuesPipe, KeysPipe, PersonForm],
+  declarations: [AppComponent, NavbarComponent, ProcbarComponent, GenlistComponent, ValuesPipe, KeysPipe, PersonForm ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

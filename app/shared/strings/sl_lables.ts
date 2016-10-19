@@ -4,25 +4,32 @@
 export class LocalLabels {
     labels =
     {
-        "language": "slovenian",
-        "components": {
-            "genlist": {
-                "title": "Urejanje šifranta ",
-                "post": {
+        language: "slovenian",
+        components: {
+            genlist: {
+                title: "Urejanje šifranta ",
+                post: {
                     tableTitle: "pošt",
-                    "postId": "#",
-                    "name": "Naziv pošte",
-                    "zipcode": "Poštna številka"
+                    postId: "#",
+                    name: "Naziv pošte",
+                    zipcode: "Poštna številka"
                 },
-                "commune": {
+                commune: {
                     tableTitle: "občin",
-                    "communeId": "#",
-                    "name": "Naziv občine"
+                    communeId: "#",
+                    name: "Naziv občine"
                 },
-                "education": {
+                education: {
                     tableTitle: "izobrazb",
-                    "educationId": "#",
-                    "name": "Vrsta izobrazbe"
+                    educationId: "#",
+                    name: "Vrsta izobrazbe"
+                },
+                person: {
+                    tableTitle: "oseb",
+                    personId: "#",
+                    firstName: "Ime",
+                    lastName: "Priimek",
+                    newRecord: "/person"
                 }
             }
         }

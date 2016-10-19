@@ -44,5 +44,9 @@ export class GenlistComponent implements OnInit {
 		this.tableLabels = this._labels.labels.components.genlist[this.id.id];
 	}
 
+	newRecord(link){
+		this.router.navigate([link]);
+	}
+
 
 }

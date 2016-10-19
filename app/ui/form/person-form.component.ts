@@ -15,7 +15,9 @@ export class PersonForm {
 
     constructor(fb: FormBuilder) {
         this.myForm = fb.group({
-            'sku': ['ABC123']
+            'input1': ['ABC123'],
+            'input2': ['a@b.co'],
+            date: ''
         });
     }
 

@@ -18,7 +18,7 @@
     "typings": "typings",
     "webdriver:update": "webdriver-manager update",
     "clean_translate": "ng-xi18n",
-    "update_translate": "gulp i18n-update" 
+    "update_translate": "gulp i18n-update"
   },
   "keywords": [],
   "author": "",

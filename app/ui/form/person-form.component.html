@@ -1,12 +1,104 @@
-<div class="ui raised segment">
-	<h2 class="ui header">Demo Form: Sku with Builder</h2>
-	<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" class="ui form">
-
-		<div class="field">
-			<label for="skuInput">SKU</label>
-			<input type="text" id="skuInput" placeholder="SKU" [formControl]="myForm.controls['sku']">
+<div class="container">
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading table-bordered">
+			<h3>Urejanje osebe</h3>
 		</div>
 
-		<button type="submit" class="ui button">Submit</button>
-	</form>
+
+
+
+		<div class="panel-body">
+
+			<form class="form-horizontal">
+				<fieldset>
+
+					<!-- Text input-->
+
+
+					<!-- Text input-->
+					<div class="form-group">
+
+						<label class="col-md-2 control-label" for="firstname">Ime</label>
+						<div class="col-md-4">
+							<input id="firstname" name="firstname" type="text" placeholder="Ime" class="form-control input-md" required=""></div>
+						<label class="col-md-1 control-label" for="lastname">Priimek</label>
+						<div class="col-md-4">
+							<input id="lastname" name="lastname" type="text" placeholder="Priimek" class="form-control input-md" required=""></div>
+					</div>
+
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="address">Naslov</label>
+						<div class="col-md-4">
+							<input id="address" name="address" type="text" placeholder="Naslov" class="form-control input-md">
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="commune">Občina</label>
+						<div class="col-md-4">
+							<input id="commune" name="commune" type="text" placeholder="Občina" class="form-control input-md">
+						</div>
+
+						<label class="col-md-1 control-label" for="post">Pošta</label>
+						<div class="col-md-4">
+							<input id="post" name="post" type="text" placeholder="Pošta" class="form-control input-md">
+						</div>
+					</div>
+
+
+					<!-- Text input-->
+					<div class="form-group">
+
+						<label class="col-md-2 control-label" for="mobileNumber">Mobilna številka</label>
+						<div class="col-md-4">
+							<input id="mobileNumber" name="mobileNumber" type="text" placeholder="Telefonska številka" class="form-control input-md">
+						</div>
+
+						<label class="col-md-1 control-label" for="email">e-pošta</label>
+						<div class="col-md-4">
+							<input id="email" name="email" type="text" placeholder="a@b.com" class="form-control input-md">
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="birthdate">Rojstni datum</label>
+						<div class="col-md-4">
+							<input id="birthdate" name="birthdate" type="text" placeholder="Rojstni datum" class="form-control input-md">
+						</div>
+						
+					</div>
+
+					<!-- Select Basic -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="citizenship">Državljanstvo</label>
+						<div class="col-md-4">
+							<select id="citizenship" name="citizenship" class="form-control">
+     							<option value="1">Slovensko</option>
+      							<option value="2">Angleško</option>
+   							</select>
+						</div>
+						<a><label class="col-md-2 control-label clickable" for="statement">Izjava o vključitvi</label>		</a>
+					</div>
+
+					<!-- Select Basic -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="education">Izobrazba</label>
+						<div class="col-md-4">
+							<select id="education" name="education" class="form-control">
+      <option value="1">nedokončana OŠ</option>
+      <option value="2">dokončana OŠ</option>
+    </select>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+
+		</div>
+	</div>
 </div>
