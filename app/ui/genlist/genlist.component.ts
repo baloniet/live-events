@@ -23,7 +23,7 @@ export class GenlistComponent implements OnInit {
 		private router: Router,
 		private _service: DataService,
 		private _labels: LocalLabels
-	) {	}
+	) { }
 
 	ngOnInit() {
 
@@ -38,16 +38,8 @@ export class GenlistComponent implements OnInit {
 	}
 
 	selectData(id) {
-		switch (id.id) {
-			case "post":
-				this.data = this._service.getPosts(); //tole je seveda http klic 
-				break;
+		this.data = this._service.getData(id.id); //tole je seveda http klic in vsi ti klici bi bili lahko parametrski in bi se service ukvarjal s switchom
 
-			default:
-				this.data = [];
-				break;
-		}
-		
 		this.title = this._labels.labels.components.genlist.title;
 		this.tableLabels = this._labels.labels.components.genlist[this.id.id];
 	}
