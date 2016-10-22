@@ -23,7 +23,7 @@ import { ValuesPipe, KeysPipe } from './shared/valuesPipe';
     RouterModule.forRoot([
       { path: 'genlist/:id', component: GenlistComponent },
       { path: 'person', component: PersonForm },
-      { path: 'month', component: ScheduleProxy },
+      { path: 'schedule/:view', component: ScheduleProxy },
       { path: '', component: ProcbarComponent },
     ]),
     FormsModule, ReactiveFormsModule, ScheduleModule ],
