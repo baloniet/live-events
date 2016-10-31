@@ -1,10 +1,10 @@
 <div class="container">
-	<div *ngIf="tableLabels" class="panel panel-default">
+	<div *ngIf="labels" class="panel panel-default">
 		<!-- Default panel contents -->
 		<div class="panel-heading table-bordered">
-			<h3>{{title}} {{tableLabels.tableTitle}}</h3>
-			<button class="btn btn-link btn-xs" (click)="newRecord(tableLabels.newRecord)">  
-            <i class="fa fa-plus"></i><span> Dodaj nov zapis</span>
+			<h3>{{labels.titles.genlist}}</h3>
+			<button class="btn btn-link btn-xs" (click)="newRecord(labels.newRecordRoute)">  
+            <i class="fa fa-plus"></i><span> {{labels.titles.formNew}}</span>
                         </button>
 		</div>
 
@@ -14,7 +14,7 @@
 				<table class="table table-hover table-bordered">
 					<thead>
 						<tr class="active h4">
-							<th *ngFor="let d of data[0] | keys">{{tableLabels[d]}}</th>
+							<th *ngFor="let d of data[0] | keys">{{labels.properties[d].name}}</th>
 							<th></th>
 						</tr>
 
@@ -23,7 +23,7 @@
 						<tr *ngFor="let d of data">
 							<td *ngFor="let i of d | values">{{i}}</td>
 							<td>
-								<i class="glyphicon glyphicon-edit clickable" aria-hidden="true"></i><span>&nbsp;</span>
+								<a [routerLink]="['/form',labels.route,d.id]"><i class="glyphicon glyphicon-edit clickable" aria-hidden="true"></i></a>
 								<i class="glyphicon glyphicon-remove clickable" aria-hidden="true"></i>
 							</td>
 						</tr>
@@ -32,5 +32,5 @@
 			</div>
 		</div>
 	</div>
-	<div *ngIf="!tableLabels">Šifrant ne obstaja</div>
+	<div *ngIf="!labels">Šifrant ne obstaja</div>
 </div>

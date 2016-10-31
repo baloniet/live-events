@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DataService } from '../../shared/data/data.service';
-import { LocalLabels } from '../../shared/strings/sl_lables';
+
+import { LabelService } from '../../shared/data/label.service';
+
+// poskus uporabe loopback sdk 
+import { LoopBackConfig } from '../../shared/sdk/index';
+import { Post, AccessToken } from '../../shared/sdk/models/index';
+import { PostApi, CommuneApi } from '../../shared/sdk/services/index';
+import { Http } from '@angular/http';
+import { BASE_API_URL, API_VERSION } from '../../shared/base.url';
 
 @Component({
 	selector: 'genlist',
 	templateUrl: './app/ui/genlist/genlist.component.html',
-	providers: [DataService, LocalLabels]
+	providers: [DataService, LabelService]
 })
 
 export class GenlistComponent implements OnInit {
@@ -15,15 +23,24 @@ export class GenlistComponent implements OnInit {
 
 	private data = [];
 
-	private title;
+
+
 	private tableLabels;
+
+	private labels;
 
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private _service: DataService,
-		private _labels: LocalLabels
-	) { }
+		private _labelService: LabelService,
+		private _postApi: PostApi,
+		private _communeApi: CommuneApi,
+	) {
+		LoopBackConfig.setBaseURL(BASE_API_URL);
+		LoopBackConfig.setApiVersion(API_VERSION);
+
+	}
 
 	ngOnInit() {
 
@@ -31,21 +48,35 @@ export class GenlistComponent implements OnInit {
 			.subscribe(
 			res =>
 				(
-					this.id = res, this.
-						selectData(this.id)
+					this.data = [],
+					this.id = res,
+					this.selectData(this.id),
+					this._labelService.getLabels('sl', this.id.id)
+						.subscribe(
+						res => this.prepareStrings(res),
+						err => {
+							console.log("LabelService error: " + err);
+						})
 				)
 			);
 	}
 
 	selectData(id) {
-		this.data = this._service.getData(id.id); //tole je seveda http klic in vsi ti klici bi bili lahko parametrski in bi se service ukvarjal s switchom
 
-		this.title = this._labels.labels.components.genlist.title;
-		this.tableLabels = this._labels.labels.components.genlist[this.id.id];
+		if (id.id == "post")
+			this._postApi.find().subscribe(res => this.data = res);
+
+		if (id.id == "commune")
+			this._communeApi.find().subscribe(res => this.data = res);
+
 	}
 
-	newRecord(link){
+	newRecord(link) {
 		this.router.navigate([link]);
+	}
+
+	prepareStrings(labels) {
+		this.labels = labels;
 	}
 
 

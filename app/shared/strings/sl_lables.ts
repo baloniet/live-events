@@ -1,5 +1,5 @@
 /* translation file for slovenian language */
-
+/* not in use */
 
 export class LocalLabels {
     labels =
@@ -7,17 +7,19 @@ export class LocalLabels {
         language: "slovenian",
         components: {
             genlist: {
-                title: "Urejanje šifranta ",
+                title: "Urejanje xxxxxšifranta ",
                 post: {
-                    tableTitle: "pošt",
+                    tableTitle: "xxxxxpošt",
                     postId: "#",
-                    name: "Naziv pošte",
-                    zipcode: "Poštna številka"
+                    name: "Nazivxxxxpošte",
+                    zipcode: "Poštna xxxxštevilka",
+                    newRecordRoute: "./post"
                 },
                 commune: {
-                    tableTitle: "občin",
+                    tableTitle: "xxxxobčin",
                     communeId: "#",
-                    name: "Naziv občine"
+                    name: "Naziv xxxxobčine",
+                    newRecordRoute: "genlist/commune/new"
                 },
                 education: {
                     tableTitle: "izobrazb",
@@ -30,6 +32,23 @@ export class LocalLabels {
                     firstName: "Ime",
                     lastName: "Priimek",
                     newRecord: "/person"
+                }
+            },
+            form: {
+                new: {
+                    title: "Vnos ",
+                    action: "Shrani "
+                },
+                edit: {
+                    title: "Urejanje ",
+                    action: "Shrani"
+                },
+                btn: {
+                    cancel: "Prekliči"
+                },
+                post: {
+                    new: "nove ",
+                    title: " pošte"
                 }
             }
         }
