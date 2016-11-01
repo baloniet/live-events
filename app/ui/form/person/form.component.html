@@ -1,0 +1,66 @@
+<div class="container">
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading table-bordered">
+
+			<!-- Form title -->
+			<form-title 
+				[param]="param" [formTitles]="formTitles" [isDelete]="isDelete">
+			</form-title>
+		</div>
+
+		<div class="panel-body">
+			<form class="form-horizontal" [formGroup]="form">
+				<fieldset>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="firstname">{{formLabels?.firstname?.name}}</label>
+						<div class="col-md-4">
+							<input 
+								formControlName="firstname"
+								type="text" 
+								placeholder="{{formLabels?.firstname?.placeholder}}" 
+								class="form-control input-md">
+							<span *ngIf="!isDelete" class="help-block">{{formLabels?.firstname?.help}}</span>
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="lastname">{{formLabels?.lastname?.name}}</label>
+						<div class="col-md-4">
+							<input 
+								formControlName="lastname"
+								type="text" 
+								placeholder="{{formLabels?.lastname?.placeholder}}" 
+								class="form-control input-md">
+							<span *ngIf="!isDelete" class="help-block">{{formLabels?.lastname?.help}}</span>
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="birthdate">{{formLabels?.birthdate?.name}}</label>
+						<div class="col-md-2">
+							<input 
+								formControlName="birthdate"
+								type="datetime" 
+								placeholder="{{formLabels?.birthdate?.placeholder}}" 
+								class="form-control input-md">
+							<span class="help-block">{{formLabels?.birthdate?.help}}</span>
+				
+						</div>
+					</div>
+
+					<!-- Form buttons -->
+					<form-button 
+						[form]="form" [formTitles]="formTitles" [isDelete]="isDelete"
+						(onBack)="back()" (onSave)="save(form.value)" (onDelete)="delete(form.value)">
+					</form-button>
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>

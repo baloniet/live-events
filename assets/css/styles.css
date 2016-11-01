@@ -16,6 +16,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', end
     color:  gray;
     font-size: 0.7em;
 }
+.rediš {
+    color: darkred;
+}
 .thumbnail {
     border-radius: 100%;
 }

@@ -4,8 +4,9 @@
 		<div class="panel-heading table-bordered">
 
 			<!-- Form title -->
-			<h3 *ngIf="id">{{formTitles?.formUpdate}}</h3>
-			<h3 *ngIf="!id">{{formTitles?.formNew}}</h3>
+			<form-title 
+				[param]="param" [formTitles]="formTitles" [isDelete]="isDelete">
+			</form-title>
 		</div>
 
 		<div class="panel-body">
@@ -20,9 +21,8 @@
 								formControlName="name"
 								type="text" 
 								placeholder="{{formLabels?.name?.placeholder}}" 
-								class="form-control input-md"
-							>
-							<span class="help-block">{{formLabels?.name?.help}}</span>
+								class="form-control input-md">
+							<span *ngIf="!isDelete" class="help-block">{{formLabels?.name?.help}}</span>
 						</div>
 					</div>
 
@@ -40,17 +40,12 @@
 						</div>
 					</div>
 
-					<!-- Button (Double) -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="ok"></label>
-						<div class="col-md-8">
-							<button class="btn btn-link btn-xs" (click)="back(); false">  
-                				<i class="fa fa-times"></i><span> {{formTitles?.cancel}}</span>
-              				</button>
-							<button class="btn btn-info" (click)="save(form.value); false">{{formTitles?.save}}</button>
-						</div>
-					</div>
-					
+					<!-- Form buttons -->
+					<form-button 
+						[form]="form" [formTitles]="formTitles" [isDelete]="isDelete"
+						(onBack)="back()" (onSave)="save(form.value)" (onDelete)="delete(form.value)">
+					</form-button>
+
 				</fieldset>
 			</form>
 		</div>

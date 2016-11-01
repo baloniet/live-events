@@ -1,0 +1,11 @@
+                    <!-- Buttons (Triple) -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="ok"></label>
+						<div class="col-md-8">
+							<button class="btn btn-link btn-xs" (click)="back(); false">  
+                				<i class="fa fa-angle-double-left"></i><span> {{formTitles?.cancel}}</span>
+              				</button>
+							<button *ngIf="!isDelete" [disabled]="!form.valid || form.pristine"  class="btn btn-info" (click)="save(form.value); false">{{formTitles?.save}}</button>
+							<button *ngIf="isDelete" class="btn btn-danger" (click)="delete(form.value); false">{{formTitles?.delete}}</button>
+						</div>
+					</div>

@@ -14,20 +14,29 @@
 				<table class="table table-hover table-bordered">
 					<thead>
 						<tr class="active h4">
-							<th *ngFor="let d of data[0] | keys">{{labels.properties[d].name}}</th>
+							<th *ngFor="let d of data[0] | keys">{{labels.properties[d]?.name}}</th>
 							<th></th>
 						</tr>
 
 					</thead>
+
 					<tbody>
 						<tr *ngFor="let d of data">
-							<td *ngFor="let i of d | values">{{i}}</td>
-							<td>
-								<a [routerLink]="['/form',labels.route,d.id]"><i class="glyphicon glyphicon-edit clickable" aria-hidden="true"></i></a>
-								<i class="glyphicon glyphicon-remove clickable" aria-hidden="true"></i>
+							<td *ngFor='let val of d | values; let i = index' [class.col-md-1]="i==0">
+								<div *ngIf="labels.properties[val.key]?.format">
+								{{val.value | date: labels.properties[val.key].format}}
+								</div>
+								<div *ngIf="!labels.properties[val.key]?.format">
+								{{val.value}}
+								</div>
+							</td>
+							<td class="col-md-1 center-block">
+								<a [routerLink]="['/form',labels.route,d.id,'u']"><i class="glyphicon glyphicon-edit clickable" aria-hidden="true"></i></a>
+								<a [routerLink]="['/form',labels.route,d.id,'b']"><i class="glyphicon glyphicon-remove rediš  clickable" aria-hidden="true"></i></a>
 							</td>
 						</tr>
 					</tbody>
+
 				</table>
 			</div>
 		</div>

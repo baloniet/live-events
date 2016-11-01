@@ -1,24 +1,22 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface PostInterface {
+export interface EducationInterface {
   id: number;
   name: string;
-  zipcode: number;
 }
 
-export class Post implements PostInterface {
+export class Education implements EducationInterface {
   id: number;
   name: string;
-  zipcode: number;
-  constructor(instance?: PostInterface) {
+  constructor(instance?: EducationInterface) {
     Object.assign(this, instance);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Post`.
+   * i.e. `Education`.
    */
   public static getModelName() {
-    return "Post";
+    return "Education";
   }
 }

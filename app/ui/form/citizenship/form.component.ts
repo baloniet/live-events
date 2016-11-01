@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { LabelService } from '../../../shared/data/label.service';
-import { CommuneApi } from '../../../shared/sdk/services/index';
-import { Commune } from '../../../shared/sdk/models/index';
+import { CitizenshipApi } from '../../../shared/sdk/services/index';
+import { Post } from '../../../shared/sdk/models/index';
 
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
-    selector: 'commune-form',
+    selector: 'citizenship-form',
     templateUrl: 'form.component.html',
-    providers: [LabelService, CommuneApi]
+    providers: [LabelService, CitizenshipApi]
 })
-export class CommuneForm implements OnInit {
+export class CitizenshipForm implements OnInit {
 
     private formTitles;
     private formLabels;
@@ -27,7 +27,7 @@ export class CommuneForm implements OnInit {
         private _labelService: LabelService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _api: CommuneApi,
+        private _api: CitizenshipApi,
         private _fb: FormBuilder
     ) { }
 
@@ -40,7 +40,7 @@ export class CommuneForm implements OnInit {
             name: ['']
         });
 
-        this._labelService.getLabels('sl', 'commune')
+        this._labelService.getLabels('sl', 'citizenship')
             .subscribe(
             res => this.prepareStrings(res),
             err => {
@@ -66,11 +66,11 @@ export class CommuneForm implements OnInit {
     }
 
     back() {
-        this._router.navigate(['/genlist/commune']);
+        this._router.navigate(['/genlist/citizenship']);
     }
 
     // send model to service and save to db, return to list
-    save(model: Commune) {
+    save(model: Post) {
 
         if (!this.form.pristine) {
             this._api.upsert(model)
@@ -96,7 +96,7 @@ export class CommuneForm implements OnInit {
     }
 
     // delete model with service from db, return to list
-    delete(model: Commune) {
+    delete(model: Post) {
 
         this._api.deleteById(model.id)
             .subscribe(

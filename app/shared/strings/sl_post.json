@@ -22,7 +22,9 @@
     "genlist": "Urejanje šifranta pošt",
     "formNew": "Vnos nove pošte",
     "formUpdate": "Urejanje pošte",
+    "formDelete": "Ali res želite izbrisati podatke o pošti?",
     "save": "Shrani",
-    "cancel": "Prekliči"
+    "cancel": "Prekliči",
+    "delete": "Izbriši"
   }
 }

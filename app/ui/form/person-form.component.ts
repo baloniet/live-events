@@ -10,7 +10,7 @@ import {
     selector: 'person-form',
     templateUrl: './app/ui/form/person-form.component.html'
 })
-export class PersonForm {
+export class PersonxForm {
     myForm: FormGroup;
 
     constructor(fb: FormBuilder) {

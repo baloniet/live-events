@@ -10,16 +10,16 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Post } from '../../models/Post';
+import { Education } from '../../models/Education';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 
 /**
- * Api services for the `Post` model.
+ * Api services for the `Education` model.
  */
 @Injectable()
-export class PostApi extends BaseLoopBackApi {
+export class EducationApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) http: Http,
@@ -43,20 +43,20 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public create(data: any = undefined): Observable<Post> {
+  public create(data: any = undefined): Observable<Education> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts";
+    "/Education";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Post) => new Post(instance));
+    return result.map((instance: Education) => new Education(instance));
   }
 
   /**
@@ -72,20 +72,20 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public upsert(data: any = undefined): Observable<Post> {
+  public upsert(data: any = undefined): Observable<Education> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts";
+    "/Education";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Post) => new Post(instance));
+    return result.map((instance: Education) => new Education(instance));
   }
 
   /**
@@ -101,13 +101,13 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
   public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/replaceOrCreate";
+    "/Education/replaceOrCreate";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -132,13 +132,13 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Post> {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Education> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/upsertWithWhere";
+    "/Education/upsertWithWhere";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -146,7 +146,7 @@ export class PostApi extends BaseLoopBackApi {
     let urlParams: any = {};
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Post) => new Post(instance));
+    return result.map((instance: Education) => new Education(instance));
   }
 
   /**
@@ -165,7 +165,7 @@ export class PostApi extends BaseLoopBackApi {
   public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/:id/exists";
+    "/Education/:id/exists";
     let routeParams: any = {
       id: id
     };
@@ -188,13 +188,13 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Post> {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Education> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/:id";
+    "/Education/:id";
     let routeParams: any = {
       id: id
     };
@@ -202,7 +202,7 @@ export class PostApi extends BaseLoopBackApi {
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Post) => new Post(instance));
+    return result.map((instance: Education) => new Education(instance));
   }
 
   /**
@@ -220,13 +220,13 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
   public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/:id/replace";
+    "/Education/:id/replace";
     let routeParams: any = {
       id: id
     };
@@ -249,20 +249,20 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined): Observable<Array<Post>> {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<Education>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts";
+    "/Education";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Post>) =>
-        instances.map((instance: Post) => new Post(instance))
+    return result.map((instances: Array<Education>) =>
+        instances.map((instance: Education) => new Education(instance))
     );
   }
 
@@ -277,19 +277,19 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined): Observable<Post> {
+  public findOne(filter: LoopBackFilter = undefined): Observable<Education> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/findOne";
+    "/Education/findOne";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Post) => new Post(instance));
+    return result.map((instance: Education) => new Education(instance));
   }
 
   /**
@@ -310,7 +310,7 @@ export class PostApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/update";
+    "/Education/update";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -332,13 +332,13 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
   public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/:id";
+    "/Education/:id";
     let routeParams: any = {
       id: id
     };
@@ -364,7 +364,7 @@ export class PostApi extends BaseLoopBackApi {
   public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/count";
+    "/Education/count";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -388,13 +388,13 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
   public updateAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/:id";
+    "/Education/:id";
     let routeParams: any = {
       id: id
     };
@@ -423,7 +423,7 @@ export class PostApi extends BaseLoopBackApi {
    */
   public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts/change-stream";
+    "/Education/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
       let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
@@ -448,29 +448,29 @@ export class PostApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Post` object.)
+   * This usually means the response is a `Education` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined): Observable<Array<Post>> {
+  public createMany(data: Array<any> = undefined): Observable<Array<Education>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Posts";
+    "/Education";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Post>) =>
-        instances.map((instance: Post) => new Post(instance))
+    return result.map((instances: Array<Education>) =>
+        instances.map((instance: Education) => new Education(instance))
     );
   }
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Post`.
+   * i.e. `Education`.
    */
   public getModelName() {
-    return "Post";
+    return "Education";
   }
 }

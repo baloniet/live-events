@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { LabelService } from '../../../shared/data/label.service';
-import { CommuneApi } from '../../../shared/sdk/services/index';
-import { Commune } from '../../../shared/sdk/models/index';
+import { StatementApi } from '../../../shared/sdk/services/index';
+import { Statement } from '../../../shared/sdk/models/index';
 
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
-    selector: 'commune-form',
+    selector: 'statement-form',
     templateUrl: 'form.component.html',
-    providers: [LabelService, CommuneApi]
+    providers: [LabelService, StatementApi]
 })
-export class CommuneForm implements OnInit {
+export class StatementForm implements OnInit {
 
     private formTitles;
     private formLabels;
@@ -27,7 +27,7 @@ export class CommuneForm implements OnInit {
         private _labelService: LabelService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _api: CommuneApi,
+        private _api: StatementApi,
         private _fb: FormBuilder
     ) { }
 
@@ -37,10 +37,11 @@ export class CommuneForm implements OnInit {
 
         this.form = this._fb.group({
             id: [''],
-            name: ['']
+            name: [''],
+            content: ['']
         });
 
-        this._labelService.getLabels('sl', 'commune')
+        this._labelService.getLabels('sl', 'statement')
             .subscribe(
             res => this.prepareStrings(res),
             err => {
@@ -66,11 +67,11 @@ export class CommuneForm implements OnInit {
     }
 
     back() {
-        this._router.navigate(['/genlist/commune']);
+        this._router.navigate(['/genlist/statement']);
     }
 
     // send model to service and save to db, return to list
-    save(model: Commune) {
+    save(model: Statement) {
 
         if (!this.form.pristine) {
             this._api.upsert(model)
@@ -96,7 +97,7 @@ export class CommuneForm implements OnInit {
     }
 
     // delete model with service from db, return to list
-    delete(model: Commune) {
+    delete(model: Statement) {
 
         this._api.deleteById(model.id)
             .subscribe(

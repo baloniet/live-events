@@ -42,6 +42,10 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { UserApi } from './services/custom/User';
 import { PostApi } from './services/custom/Post';
 import { CommuneApi } from './services/custom/Commune';
+import { EducationApi } from './services/custom/Education';
+import { CitizenshipApi } from './services/custom/Citizenship';
+import { StatementApi } from './services/custom/Statement';
+import { PersonApi } from './services/custom/Person';
 
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
@@ -61,7 +65,11 @@ export class SDKModule {
         JSONSearchParams,
         UserApi,
         PostApi,
-        CommuneApi
+        CommuneApi,
+        EducationApi,
+        CitizenshipApi,
+        StatementApi,
+        PersonApi
       ]
     };
   }

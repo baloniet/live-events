@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataService } from '../../shared/data/data.service';
 
 import { LabelService } from '../../shared/data/label.service';
 
 // poskus uporabe loopback sdk 
 import { LoopBackConfig } from '../../shared/sdk/index';
 import { Post, AccessToken } from '../../shared/sdk/models/index';
-import { PostApi, CommuneApi } from '../../shared/sdk/services/index';
+import { PostApi, CommuneApi, EducationApi, StatementApi, CitizenshipApi, PersonApi } from '../../shared/sdk/services/index';
 import { Http } from '@angular/http';
 import { BASE_API_URL, API_VERSION } from '../../shared/base.url';
 
 @Component({
 	selector: 'genlist',
 	templateUrl: './app/ui/genlist/genlist.component.html',
-	providers: [DataService, LabelService]
+	providers: [LabelService]
 })
 
 export class GenlistComponent implements OnInit {
@@ -23,8 +22,6 @@ export class GenlistComponent implements OnInit {
 
 	private data = [];
 
-
-
 	private tableLabels;
 
 	private labels;
@@ -32,10 +29,13 @@ export class GenlistComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private _service: DataService,
 		private _labelService: LabelService,
 		private _postApi: PostApi,
 		private _communeApi: CommuneApi,
+		private _educationApi: EducationApi,
+		private _statementApi: StatementApi,
+		private _citizenshipApi: CitizenshipApi,
+		private _personApi: PersonApi,
 	) {
 		LoopBackConfig.setBaseURL(BASE_API_URL);
 		LoopBackConfig.setApiVersion(API_VERSION);
@@ -69,6 +69,18 @@ export class GenlistComponent implements OnInit {
 		if (id.id == "commune")
 			this._communeApi.find().subscribe(res => this.data = res);
 
+		if (id.id == "education")
+			this._educationApi.find().subscribe(res => this.data = res);
+
+		if (id.id == "statement")
+			this._statementApi.find().subscribe(res => this.data = res);
+
+		if (id.id == "citizenship")
+			this._citizenshipApi.find().subscribe(res => this.data = res);
+
+		if (id.id == "person")
+			this._personApi.find().subscribe(res => this.data = res);
+
 	}
 
 	newRecord(link) {
@@ -78,6 +90,5 @@ export class GenlistComponent implements OnInit {
 	prepareStrings(labels) {
 		this.labels = labels;
 	}
-
 
 }

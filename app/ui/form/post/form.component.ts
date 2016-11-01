@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { LabelService } from '../../../shared/data/label.service';
 
+import { LabelService } from '../../../shared/data/label.service';
 import { PostApi } from '../../../shared/sdk/services/index';
 import { Post } from '../../../shared/sdk/models/index';
 
@@ -10,29 +10,30 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 @Component({
     moduleId: module.id,
     selector: 'post-form',
-    templateUrl: 'template.html', ///./app/ui/form/post/
+    templateUrl: 'form.component.html',
     providers: [LabelService, PostApi]
 })
 export class PostForm implements OnInit {
 
     private formTitles;
     private formLabels;
-    private id;
-    private post;
+    private param;
+    private data;
+    private isDelete;
 
     public form: FormGroup;
-    public submitted: boolean;
-
 
     constructor(
         private _labelService: LabelService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _postApi: PostApi,
+        private _api: PostApi,
         private _fb: FormBuilder
     ) { }
 
     ngOnInit() {
+
+        this.isDelete = false;
 
         this.form = this._fb.group({
             id: [''],
@@ -50,9 +51,12 @@ export class PostForm implements OnInit {
         this._route.params
             .subscribe(
             res => {
-                this.id = res;
-                this.id = this.id.id;
-                this.selectData(this.id);
+                this.param = res;
+                if (this.param.action == 'b'){ 
+                    this.isDelete = true;
+                    this.form.disable();
+                }
+                this.selectData(this.param);
             });
 
     }
@@ -66,34 +70,41 @@ export class PostForm implements OnInit {
         this._router.navigate(['/genlist/post']);
     }
 
+    // send model to service and save to db, return to list
     save(model: Post) {
-        this.submitted = true;
+
         if (!this.form.pristine) {
-            console.log("save clicked, not implemented: ", model);
-            this._postApi.upsert(model)
+            this._api.upsert(model)
                 .subscribe(
-                res => {
-                    console.log(res),
-                        this.form.markAsPristine()
-                },
-                error => console.log(error)
+                res => this.form.markAsPristine(),
+                error => console.log(error),
+                () => this.back()
                 );
         }
+
     }
 
-    selectData(id) {
+    // call service to find model in db
+    selectData(param) {
 
-        if (id)
-            this._postApi.findById(id)
+        if (param.id)
+            this._api.findById(param.id)
                 .subscribe(res => {
-                    this.post = res;
+                    this.data = res;
                     (<FormGroup>this.form)
-                        .setValue(this.post, { onlySelf: true });
+                        .setValue(this.data, { onlySelf: true });
                 });
     }
+
+    // delete model with service from db, return to list
+    delete(model: Post) {
+
+        this._api.deleteById(model.id)
+            .subscribe(
+            null,
+            error => console.log(error),
+            () => this.back()
+            );
+
+    }
 }
-
-// iz servicea podatke o obstoječem zapisu in jih prikaži če !isNew
-
-// save --> service save
-// kasneje še heci z gumbi
