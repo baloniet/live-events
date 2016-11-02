@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 import {
     FormBuilder,
     FormGroup
@@ -7,17 +8,29 @@ import {
 
 
 @Component({
+    moduleId: module.id,
     selector: 'person-form',
-    templateUrl: './app/ui/form/person-form.component.html'
+    templateUrl: 'person-form.component.html'
 })
 export class PersonxForm {
-    myForm: FormGroup;
+    personForm: FormGroup;
+
+    date: Date;
+    datepickerOpts: any = {
+        startDate: new Date(1916, 1, 1),
+        autoclose: true,
+        todayBtn: 'linked',
+        todayHighlight: true,
+        assumeNearbyYear: false,
+        format: 'd MM yyyy',
+        icon: 'fa fa-calendar-o'
+    };
 
     constructor(fb: FormBuilder) {
-        this.myForm = fb.group({
+        this.personForm = fb.group({
             'input1': ['ABC123'],
             'input2': ['a@b.co'],
-            date: ''
+            bdate: ''
         });
     }
 

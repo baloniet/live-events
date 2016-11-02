@@ -68,9 +68,10 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="birthdate">Rojstni datum</label>
 						<div class="col-md-4">
-							<input id="birthdate" name="birthdate" type="text" placeholder="Rojstni datum" class="form-control input-md">
+							<datetime [(ngModel)]="date" [datepicker]="datepickerOpts" [timepicker]="false" name="bdate" formControlName="bdate"></datetime>
+							<!--input id="birthdate" name="birthdate" type="text" placeholder="Rojstni datum" class="form-control input-md"-->
 						</div>
-
+						
 					</div>
 
 					<!-- Select Basic -->
