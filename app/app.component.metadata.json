@@ -1,1 +1,0 @@
-{"__symbolic":"module","version":1,"metadata":{"AppComponent":{"__symbolic":"class","decorators":[{"__symbolic":"call","expression":{"__symbolic":"reference","module":"@angular/core","name":"Component"},"arguments":[{"selector":"my-app","template":"<h1 i18n=\"User welcome| Application title\">My First Angular App</h1><label i18n=\"User name\">User name</label>"}]}]}}}

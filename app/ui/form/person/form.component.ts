@@ -23,6 +23,17 @@ export class PersonForm implements OnInit {
 
     public form: FormGroup;
 
+  //  date = new Date(2016, 5, 10);
+    datepickerOpts: any = {
+        startDate: new Date(1916, 1, 1),
+        autoclose: true,
+        todayBtn: 'linked',
+        todayHighlight: true,
+        assumeNearbyYear: false,
+        format: 'd MM yyyy',
+        icon: 'fa fa-calendar-o'
+    };
+
     constructor(
         private _labelService: LabelService,
         private _router: Router,
@@ -39,7 +50,7 @@ export class PersonForm implements OnInit {
             id: [''],
             firstname: [''],
             lastname: [''],
-            birthdate: [''],
+            birthdate: [new Date(2011,2,3)],
             cdate: ['']
         });
     
@@ -93,6 +104,7 @@ export class PersonForm implements OnInit {
             this._api.findById(param.id)
                 .subscribe(res => {
                     this.data = res;
+                    
                     (<FormGroup>this.form)
                         .setValue(this.data, { onlySelf: true });
                 });

@@ -28,8 +28,8 @@ export class PersonxForm {
 
     constructor(fb: FormBuilder) {
         this.personForm = fb.group({
-            'input1': ['ABC123'],
-            'input2': ['a@b.co'],
+            'fistName': ['ABC123'],
+            'lastNAme': ['a@b.co'],
             bdate: ''
         });
     }

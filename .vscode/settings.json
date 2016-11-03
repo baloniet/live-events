@@ -11,7 +11,7 @@
         "**/*.metadata.json": true,
         "node_modules": true,
         "typings": true,
-        "e2e": true
+        "e2se": true
     },
     "files.autoSave": "onFocusChange"
 }

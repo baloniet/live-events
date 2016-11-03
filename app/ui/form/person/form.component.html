@@ -43,11 +43,17 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="birthdate">{{formLabels?.birthdate?.name}}</label>
 						<div class="col-md-2">
-							<input 
-								formControlName="birthdate"
+							<!--input 
+								formControlName="bdate"
 								type="datetime" 
 								placeholder="{{formLabels?.birthdate?.placeholder}}" 
-								class="form-control input-md">
+								class="form-control input-md"-->
+							<datetime 
+							 [datepicker]="datepickerOpts" 
+							 [timepicker]="false" 
+							 name="birthdate" 
+							 formControlName="birthdate">
+							 </datetime>	
 							<span class="help-block">{{formLabels?.birthdate?.help}}</span>
 				
 						</div>
