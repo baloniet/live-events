@@ -29,6 +29,12 @@
       "length": 300,
       "type" : "date",
       "format" : "dd. MM. yyyy, H:mm"
+    },
+    "mobileNumber":{
+      "name": "Tel. številka"
+    },
+    "email":{
+      "name": "e-pošta"
     }
   },
   "titles": {
@@ -38,6 +44,8 @@
     "formDelete": "Ali res želite izbrisati podatke o osebi?",
     "save": "Shrani",
     "cancel": "Prekliči",
-    "delete": "Izbriši"
+    "delete": "Izbriši",
+    "required": "Vnos podatka je obvezen!",
+    "email": "Elektronski naslov ni pravilen!"
   }
 }

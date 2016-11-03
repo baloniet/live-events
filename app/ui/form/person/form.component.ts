@@ -1,3 +1,4 @@
+import { BasicValidators } from '../../../shared/basicValidators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -5,7 +6,7 @@ import { LabelService } from '../../../shared/data/label.service';
 import { PersonApi } from '../../../shared/sdk/services/index';
 import { Person } from '../../../shared/sdk/models/index';
 
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +24,7 @@ export class PersonForm implements OnInit {
 
     public form: FormGroup;
 
-  //  date = new Date(2016, 5, 10);
+    //  date = new Date(2016, 5, 10);
     datepickerOpts: any = {
         startDate: new Date(1916, 1, 1),
         autoclose: true,
@@ -32,7 +33,8 @@ export class PersonForm implements OnInit {
         assumeNearbyYear: false,
         format: 'd MM yyyy',
         icon: 'fa fa-calendar-o',
-        weekStart: 1
+        weekStart: 1,
+        placeholder: 'd'
     };
 
     constructor(
@@ -49,12 +51,16 @@ export class PersonForm implements OnInit {
 
         this.form = this._fb.group({
             id: [''],
-            firstname: [''],
-            lastname: [''],
-            birthdate: [''],
-            cdate: ['']
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            birthdate: [],
+            cdate: [],
+            address: this._fb.group({
+                mobileNumber: ['', Validators.required],
+                email: ['', BasicValidators.email]
+            })
         });
-    
+
         this._labelService.getLabels('sl', 'person')
             .subscribe(
             res => this.prepareStrings(res),
@@ -66,7 +72,7 @@ export class PersonForm implements OnInit {
             .subscribe(
             res => {
                 this.param = res;
-                if (this.param.action == 'b'){ 
+                if (this.param.action == 'b') {
                     this.isDelete = true;
                     this.form.disable();
                 }
@@ -88,6 +94,7 @@ export class PersonForm implements OnInit {
     save(model: Person) {
 
         if (!this.form.pristine) {
+            console.log(model);
             this._api.upsert(model)
                 .subscribe(
                 res => this.form.markAsPristine(),
@@ -105,7 +112,7 @@ export class PersonForm implements OnInit {
             this._api.findById(param.id)
                 .subscribe(res => {
                     this.data = res;
-                    
+
                     (<FormGroup>this.form)
                         .setValue(this.data, { onlySelf: true });
                 });

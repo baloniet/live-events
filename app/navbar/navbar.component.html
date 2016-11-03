@@ -16,8 +16,15 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 
-				<li><a [routerLink]="['/person']" routerLinkActive="active"><i class="fa fa-users orangiš fa-3x"  aria-hidden="true"></i> Pregled članov <span class="sr-only">(current)</span></a></li>
-
+				<li class="dropdown">
+					<a [routerLink]="['/person']" routerLinkActive="active" data-toggle="dropdown" role="button">
+					<i class="fa fa-users orangiš fa-3x"  aria-hidden="true">
+					</i> Pregled članov <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a [routerLink]="['form/person/:id/:action']">Osebe</a></li>
+						
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-university orangiš fa-3x" aria-hidden="true"></i> Pregled izvajalcev <span class="caret"></span></a>
