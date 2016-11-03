@@ -12,7 +12,7 @@ import { TimepickerEvent } from './timepicker-event-interface';
         
         <div id="{{idDatePicker}}" class="input-group date">
             <input 
-                type="text" 
+                type="text" readonly
                 class="form-control"
                 value={{dateModel}}
                 placeholder="{{datepickerOptions.placeholder}}"
@@ -115,9 +115,10 @@ export class NKDatetime implements ControlValueAccessor, AfterViewInit, OnDestro
     }
 
     writeValue(value: any): void {
-        this.date = value;
+        this.date = new Date(value);
+        
         if (isDate(this.date)) {
-            setTimeout(() => {
+            setTimeout(() => { 
                 this.updateModel(this.date);
             }, 0);
         }

@@ -31,7 +31,8 @@ export class PersonForm implements OnInit {
         todayHighlight: true,
         assumeNearbyYear: false,
         format: 'd MM yyyy',
-        icon: 'fa fa-calendar-o'
+        icon: 'fa fa-calendar-o',
+        weekStart: 1
     };
 
     constructor(
@@ -50,7 +51,7 @@ export class PersonForm implements OnInit {
             id: [''],
             firstname: [''],
             lastname: [''],
-            birthdate: [new Date(2011,2,3)],
+            birthdate: [''],
             cdate: ['']
         });
     
