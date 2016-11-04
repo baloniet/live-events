@@ -14,8 +14,8 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-1 control-label" for="firstname">{{formLabels?.firstname?.name}}</label>
-						<div class="col-md-4">
+						<label class="col-md-2 control-label" for="firstname">{{formLabels?.firstname?.name}}</label>
+						<div class="col-md-3">
 							<input formControlName="firstname" type="text" placeholder="{{formLabels?.firstname?.placeholder}}" class="form-control input-md">
 							<span *ngIf="!isDelete" class="help-block">{{formLabels?.firstname?.help}}</span>
 							<div *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched" class="text-warning">{{formTitles?.required}}</div>
@@ -30,26 +30,19 @@
 					</div>
 
 
-
-
-
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="birthdate">{{formLabels?.birthdate?.name}}</label>
-						<div class="col-md-3">
-							<!--input 
-								formControlName="bdate"
-								type="datetime" 
-								placeholder="{{formLabels?.birthdate?.placeholder}}" 
-								class="form-control input-md"-->
+						<label class="col-md-2 control-label" for="birthdate">{{formLabels?.birthdate?.name}}</label>
+						<div class="col-md-4">
 							<datetime [datepicker]="datepickerOpts" [timepicker]="false" name="birthdate" formControlName="birthdate">
 							</datetime>
 							<span class="help-block">{{formLabels?.birthdate?.help}}</span>
-
 						</div>
 					</div>
 
-					<fieldset novalidate formGroupName="address">
+					<hr>
+
+					<fieldset>
 						<!-- Text input-->
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="mobileNumber">{{formLabels?.mobileNumber?.name}}</label>
@@ -62,11 +55,41 @@
 							<div class="col-md-4">
 								<input formControlName="email" type="text" placeholder="{{formLabels?.email?.placeholder}}" class="form-control input-md">
 								<span *ngIf="!isDelete" class="help-block">{{formLabels?.email?.help}}</span>
-								<div *ngIf="form.controls.address.controls.email.hasError('email') && form.controls.address.controls.email.touched" class="text-warning">{{formTitles?.email}}</div>
+								<div *ngIf="form.controls.email.hasError('email') && form.controls.email.touched" class="text-warning">{{formTitles?.email}}</div>
 							</div>
 						</div>
 					</fieldset>
 
+					<fieldset>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="address">{{formLabels?.address?.name}}</label>
+							<div class="col-md-3">
+								<input formControlName="address" type="text" placeholder="{{formLabels?.address?.placeholder}}" class="form-control input-md">
+								<span *ngIf="!isDelete" class="help-block">{{formLabels?.address?.help}}</span>
+							</div>
+
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="commune">{{formLabels?.commune?.name}}</label>
+							<div class="col-md-3">
+								<input formControlName="commune" type="text" placeholder="{{formLabels?.commune?.placeholder}}" class="form-control input-md">
+								<span *ngIf="!isDelete" class="help-block">{{formLabels?.commune?.help}}</span>
+							</div>
+
+							<label class="col-md-1 control-label" for="post">{{formLabels?.post?.name}}</label>
+							<div class="col-md-4">
+								<input formControlName="post" type="text" placeholder="{{formLabels?.post?.placeholder}}" class="form-control input-md">
+								<span *ngIf="!isDelete" class="help-block">{{formLabels?.post?.help}}</span>
+								<div *ngIf="form.controls.post.hasError('post') && form.controls.post.touched" class="text-warning">{{formTitles?.post}}</div>
+							</div>
+						</div>
+					</fieldset>
+				
 					<!-- Form buttons -->
 					<form-button [form]="form" [formTitles]="formTitles" [isDelete]="isDelete" (onBack)="back()" (onSave)="save(form.value)"
 						(onDelete)="delete(form.value)">

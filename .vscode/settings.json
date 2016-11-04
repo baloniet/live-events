@@ -13,5 +13,6 @@
         "typings": true,
         "e2se": true
     },
-    "files.autoSave": "onFocusChange"
+    "files.autoSave": "onFocusChange",
+    "typescript.check.workspaceVersion": false
 }

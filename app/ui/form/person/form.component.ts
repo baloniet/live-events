@@ -55,10 +55,11 @@ export class PersonForm implements OnInit {
             lastname: ['', Validators.required],
             birthdate: [],
             cdate: [],
-            address: this._fb.group({
                 mobileNumber: ['', Validators.required],
-                email: ['', BasicValidators.email]
-            })
+                email: ['', BasicValidators.email],
+                commune: [],
+                post: [],
+                address: []
         });
 
         this._labelService.getLabels('sl', 'person')
