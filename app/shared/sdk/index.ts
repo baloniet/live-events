@@ -46,6 +46,8 @@ import { EducationApi } from './services/custom/Education';
 import { CitizenshipApi } from './services/custom/Citizenship';
 import { StatementApi } from './services/custom/Statement';
 import { PersonApi } from './services/custom/Person';
+import { PPhoneApi } from './services/custom/PPhone';
+import { PEmailApi } from './services/custom/PEmail';
 
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
@@ -69,7 +71,9 @@ export class SDKModule {
         EducationApi,
         CitizenshipApi,
         StatementApi,
-        PersonApi
+        PersonApi,
+        PPhoneApi,
+        PEmailApi
       ]
     };
   }

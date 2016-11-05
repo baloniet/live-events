@@ -89,6 +89,21 @@
 							</div>
 						</div>
 					</fieldset>
+
+					<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="citizenship">{{formLabels?.citizenship?.name}}</label>
+							<div class="col-md-3">
+								<ng-select [allowClear]="true"
+              						[items]="citItems"
+              						[disabled]="false"
+              						(data)="refreshValue($event)"
+              						placeholder="{{formLabels?.citizenship?.placeholder}}">
+  								</ng-select>
+							</div>
+						</div>
+
+					
 				
 					<!-- Form buttons -->
 					<form-button [form]="form" [formTitles]="formTitles" [isDelete]="isDelete" (onBack)="back()" (onSave)="save(form.value)"
@@ -100,5 +115,7 @@
 		</div>
 	</div>
 </div>
-<!--pre>{{form.value | json}}</pre
+<pre>{{form.value | json}}</pre><!--
 <pre>{{formLabels | json }} {{form.controls.address.controls.email.hasError('email') | json}}</pre-->
+<pre>{{emails | json}}</pre>
+<pre>{{data | json}}</pre>

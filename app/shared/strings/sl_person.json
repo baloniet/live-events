@@ -46,8 +46,11 @@
     "address": {
       "name": "Naslov",
       "placeholder": "Naslov"
+    },
+    "citizenship": {
+      "name": "Državljanstvo",
+      "placeholder": "Izberi iz seznama"
     }
-    
   },
   "titles": {
     "genlist": "Urejanje šifranta oseb",

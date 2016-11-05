@@ -1,3 +1,4 @@
+import { SelectModule } from './ui/ng2-select/select.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { ScheduleModule } from './ui/schedule/schedule.module';
 import { NKDatetimeModule } from './ui/ng2-datetime/ng2-datetime.module';
+
 
 import { FrmBtn } from './ui/form/frmBtn.component';
 import { FrmTitle } from './ui/form/frmTitle.component';
@@ -51,7 +53,7 @@ import { ValuesPipe, KeysPipe } from './shared/valuesPipe';
       { path: 'schedule/:view', component: ScheduleProxy },
       { path: '', component: ProcbarComponent },
     ]), SDKModule.forRoot(),
-    ReactiveFormsModule, ScheduleModule, NKDatetimeModule],
+    ReactiveFormsModule, ScheduleModule, NKDatetimeModule, SelectModule],
   declarations: [
     AppComponent, NavbarComponent, ProcbarComponent, GenlistComponent, ValuesPipe, KeysPipe, PersonForm, PostForm, 
     CommuneForm, EducationForm, StatementForm, CitizenshipForm, PersonForm, PersonxForm, ScheduleProxy, FrmBtn, FrmTitle],

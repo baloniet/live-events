@@ -1,10 +1,13 @@
 import { BasicValidators } from '../../../shared/basicValidators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
+import { Response } from '@angular/http';
 
 import { LabelService } from '../../../shared/data/label.service';
-import { PersonApi } from '../../../shared/sdk/services/index';
-import { Person } from '../../../shared/sdk/models/index';
+import { PersonApi, CitizenshipApi, PPhoneApi, PEmailApi } from '../../../shared/sdk/services/index';
+import { Person, PPhone, PEmail } from '../../../shared/sdk/models/index';
+
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -20,9 +23,12 @@ export class PersonForm implements OnInit {
     private formLabels;
     private param;
     private data;
+    private phones: PPhone[];
+    private emails: PEmail[];
     private isDelete;
 
     public form: FormGroup;
+    private citItems;
 
     //  date = new Date(2016, 5, 10);
     datepickerOpts: any = {
@@ -42,6 +48,9 @@ export class PersonForm implements OnInit {
         private _router: Router,
         private _route: ActivatedRoute,
         private _api: PersonApi,
+        private _citApi: CitizenshipApi,
+        private _phoneApi: PPhoneApi,
+        private _emailApi: PEmailApi,
         private _fb: FormBuilder
     ) { }
 
@@ -55,11 +64,11 @@ export class PersonForm implements OnInit {
             lastname: ['', Validators.required],
             birthdate: [],
             cdate: [],
-                mobileNumber: ['', Validators.required],
-                email: ['', BasicValidators.email],
-                commune: [],
-                post: [],
-                address: []
+            mobileNumber: [''],//validator za številke
+            email: [''],// BasicValidators.email],
+            commune: [],
+            post: [],
+            address: []
         });
 
         this._labelService.getLabels('sl', 'person')
@@ -84,6 +93,7 @@ export class PersonForm implements OnInit {
 
     prepareStrings(labels) {
         this.formTitles = labels.titles;
+
         this.formLabels = labels.properties;
     }
 
@@ -95,28 +105,77 @@ export class PersonForm implements OnInit {
     save(model: Person) {
 
         if (!this.form.pristine) {
-            console.log(model);
+
+            // 1. save model - person
             this._api.upsert(model)
                 .subscribe(
-                res => this.form.markAsPristine(),
+
+                res => {
+                    
+                    //2. save mobileNumber
+                    if (this.form.controls['mobileNumber'].touched)
+                        this._phoneApi.upsert(
+                            new PPhone(
+                                { personId: res.id, numbertype: 1, number: (<any>model).mobileNumber }
+                            ))
+                            .subscribe(null, res => console.log(res));
+                    
+                    //3. save email
+                    if (this.form.controls['email'].touched)
+                        this._emailApi.upsert(
+                            new PEmail(
+                                { personId: res.id, emailtype: 1, email: (<any>model).email }
+                            ))
+                            .subscribe(null, res => console.log(res));
+
+                    this.form.markAsPristine();
+                },
+
+
                 error => console.log(error),
                 () => this.back()
                 );
         }
+
 
     }
 
     // call service to find model in db
     selectData(param) {
 
-        if (param.id)
-            this._api.findById(param.id)
-                .subscribe(res => {
-                    this.data = res;
+        // get citizenship values
+        this._citApi.find({ order: "name" }).subscribe(res => {
+            this.citItems = [];
+            for (let one of res) {
+                this.citItems.push(one.name);
+            }
+        });
+
+        if (param.id) {
+            // get mobileNumber
+            Observable.forkJoin(
+                this._api.findById(param.id),
+                this._api.getPhones(param.id), //filter numbertype=1
+                this._api.getEmails(param.id)  //filter emailtype=1
+            ).subscribe(
+                res => {
+
+                    this.data = res[0];
+                    this.phones = res[1];
+                    this.emails = res[2];
+
+                    this.data.mobileNumber = this.phones.length > 0 ? this.phones[0].number : '';
+                    this.data.email = this.emails.length > 0 ? this.emails[0].email : '';
+
+                    this.data.commune = '';
+                    this.data.post = '';
+                    this.data.address = '';
 
                     (<FormGroup>this.form)
                         .setValue(this.data, { onlySelf: true });
-                });
+                }
+                );
+        }
     }
 
     // delete model with service from db, return to list
@@ -129,5 +188,12 @@ export class PersonForm implements OnInit {
             () => this.back()
             );
 
+    }
+
+    private citValue = '';
+
+    // methods for cit select
+    public refreshValue(value: any): void {
+        this.citValue = value;
     }
 }

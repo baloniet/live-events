@@ -64,22 +64,22 @@ export class GenlistComponent implements OnInit {
 	selectData(id) {
 
 		if (id.id == "post")
-			this._postApi.find().subscribe(res => this.data = res);
+			this._postApi.find({order:"name"}).subscribe(res => this.data = res);
 
 		if (id.id == "commune")
-			this._communeApi.find().subscribe(res => this.data = res);
+			this._communeApi.find({order:"name"}).subscribe(res => this.data = res);
 
 		if (id.id == "education")
 			this._educationApi.find().subscribe(res => this.data = res);
 
 		if (id.id == "statement")
-			this._statementApi.find().subscribe(res => this.data = res);
+			this._statementApi.find({order:"name"}).subscribe(res => this.data = res);
 
 		if (id.id == "citizenship")
-			this._citizenshipApi.find().subscribe(res => this.data = res);
+			this._citizenshipApi.find({order:"name"}).subscribe(res => this.data = res);
 
 		if (id.id == "person")
-			this._personApi.find().subscribe(res => this.data = res);
+			this._personApi.find({order:["lastname","firstname"]}).subscribe(res => this.data = res);
 
 	}
 
