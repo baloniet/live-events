@@ -95,10 +95,12 @@
 							<label class="col-md-2 control-label" for="citizenship">{{formLabels?.citizenship?.name}}</label>
 							<div class="col-md-3">
 								<ng-select [allowClear]="true"
+								[initData]="[0]"
               						[items]="citItems"
               						[disabled]="false"
               						(data)="refreshValue($event)"
-              						placeholder="{{formLabels?.citizenship?.placeholder}}">
+              						placeholder="{{formLabels?.citizenship?.placeholder}}"
+									>
   								</ng-select>
 							</div>
 						</div>

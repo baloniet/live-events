@@ -10,19 +10,17 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Person } from '../../models/Person';
-import { PPhone } from '../../models/PPhone';
-import { PEmail } from '../../models/PEmail';
 import { PCiti } from '../../models/PCiti';
+import { Citizenship } from '../../models/Citizenship';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 
 /**
- * Api services for the `Person` model.
+ * Api services for the `PCiti` model.
  */
 @Injectable()
-export class PersonApi extends BaseLoopBackApi {
+export class PCitiApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) http: Http,
@@ -34,11 +32,11 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for phones.
+   * Find a related item by id for cips.
    *
    * @param any id PersistedModel id
    *
-   * @param any fk Foreign key for phones
+   * @param any fk Foreign key for cips
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -46,13 +44,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public findByIdPhones(id: any, fk: any): Observable<any> {
+  public findByIdCips(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones/:fk";
+    "/PCitis/:id/cips/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -64,11 +62,11 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for phones.
+   * Delete a related item by id for cips.
    *
    * @param any id PersistedModel id
    *
-   * @param any fk Foreign key for phones
+   * @param any fk Foreign key for cips
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -76,10 +74,10 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdPhones(id: any, fk: any): Observable<any> {
+  public destroyByIdCips(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones/:fk";
+    "/PCitis/:id/cips/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -91,11 +89,11 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for phones.
+   * Update a related item by id for cips.
    *
    * @param any id PersistedModel id
    *
-   * @param any fk Foreign key for phones
+   * @param any fk Foreign key for cips
    *
    * @param object data Request data.
    *
@@ -107,13 +105,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public updateByIdPhones(id: any, fk: any, data: any = undefined): Observable<any> {
+  public updateByIdCips(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones/:fk";
+    "/PCitis/:id/cips/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -127,220 +125,7 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for emails.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for emails
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public findByIdEmails(id: any, fk: any): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails/:fk";
-    let routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Delete a related item by id for emails.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for emails
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdEmails(id: any, fk: any): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails/:fk";
-    let routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for emails.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for emails
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public updateByIdEmails(id: any, fk: any, data: any = undefined): Observable<any> {
-    let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails/:fk";
-    let routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Fetches hasOne relation citi.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param boolean refresh 
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public getCiti(id: any, refresh: any = undefined): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/citi";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (refresh) urlParams.refresh = refresh;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in citi of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public createCiti(id: any, data: any = undefined): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/citi";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Update citi of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public updateCiti(id: any, data: any = undefined): Observable<any> {
-    let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/citi";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Deletes citi of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyCiti(id: any): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/citi";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Queries phones of Person.
+   * Queries cips of PCiti.
    *
    * @param any id PersistedModel id
    *
@@ -352,13 +137,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public getPhones(id: any, filter: LoopBackFilter = undefined): Observable<any> {
+  public getCips(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones";
+    "/PCitis/:id/cips";
     let routeParams: any = {
       id: id
     };
@@ -370,7 +155,7 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in phones of this model.
+   * Creates a new instance in cips of this model.
    *
    * @param any id PersistedModel id
    *
@@ -384,13 +169,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public createPhones(id: any, data: any = undefined): Observable<any> {
+  public createCips(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones";
+    "/PCitis/:id/cips";
     let routeParams: any = {
       id: id
     };
@@ -403,7 +188,7 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all phones of this model.
+   * Deletes all cips of this model.
    *
    * @param any id PersistedModel id
    *
@@ -413,10 +198,10 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deletePhones(id: any): Observable<any> {
+  public deleteCips(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones";
+    "/PCitis/:id/cips";
     let routeParams: any = {
       id: id
     };
@@ -427,7 +212,7 @@ export class PersonApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts phones of Person.
+   * Counts cips of PCiti.
    *
    * @param any id PersistedModel id
    *
@@ -441,126 +226,10 @@ export class PersonApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countPhones(id: any, where: any = undefined): Observable<any> {
+  public countCips(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones/count";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (where) urlParams.where = where;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Queries emails of Person.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object filter 
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public getEmails(id: any, filter: LoopBackFilter = undefined): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (filter) urlParams.filter = filter;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in emails of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public createEmails(id: any, data: any = undefined): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Deletes all emails of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteEmails(id: any): Observable<any> {
-    let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {};
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Counts emails of Person.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object where Criteria to match model instances
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   */
-  public countEmails(id: any, where: any = undefined): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails/count";
+    "/PCitis/:id/cips/count";
     let routeParams: any = {
       id: id
     };
@@ -584,20 +253,20 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public create(data: any = undefined): Observable<Person> {
+  public create(data: any = undefined): Observable<PCiti> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People";
+    "/PCitis";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Person) => new Person(instance));
+    return result.map((instance: PCiti) => new PCiti(instance));
   }
 
   /**
@@ -613,20 +282,20 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public upsert(data: any = undefined): Observable<Person> {
+  public upsert(data: any = undefined): Observable<PCiti> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People";
+    "/PCitis";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Person) => new Person(instance));
+    return result.map((instance: PCiti) => new PCiti(instance));
   }
 
   /**
@@ -642,13 +311,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
   public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/replaceOrCreate";
+    "/PCitis/replaceOrCreate";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -673,13 +342,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Person> {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<PCiti> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/upsertWithWhere";
+    "/PCitis/upsertWithWhere";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -687,7 +356,7 @@ export class PersonApi extends BaseLoopBackApi {
     let urlParams: any = {};
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Person) => new Person(instance));
+    return result.map((instance: PCiti) => new PCiti(instance));
   }
 
   /**
@@ -706,7 +375,7 @@ export class PersonApi extends BaseLoopBackApi {
   public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/exists";
+    "/PCitis/:id/exists";
     let routeParams: any = {
       id: id
     };
@@ -729,13 +398,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Person> {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<PCiti> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id";
+    "/PCitis/:id";
     let routeParams: any = {
       id: id
     };
@@ -743,7 +412,7 @@ export class PersonApi extends BaseLoopBackApi {
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Person) => new Person(instance));
+    return result.map((instance: PCiti) => new PCiti(instance));
   }
 
   /**
@@ -761,13 +430,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
   public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/replace";
+    "/PCitis/:id/replace";
     let routeParams: any = {
       id: id
     };
@@ -790,20 +459,20 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined): Observable<Array<Person>> {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<PCiti>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People";
+    "/PCitis";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Person>) =>
-        instances.map((instance: Person) => new Person(instance))
+    return result.map((instances: Array<PCiti>) =>
+        instances.map((instance: PCiti) => new PCiti(instance))
     );
   }
 
@@ -818,19 +487,19 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined): Observable<Person> {
+  public findOne(filter: LoopBackFilter = undefined): Observable<PCiti> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/findOne";
+    "/PCitis/findOne";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Person) => new Person(instance));
+    return result.map((instance: PCiti) => new PCiti(instance));
   }
 
   /**
@@ -851,7 +520,7 @@ export class PersonApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/update";
+    "/PCitis/update";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -873,13 +542,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
   public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id";
+    "/PCitis/:id";
     let routeParams: any = {
       id: id
     };
@@ -905,7 +574,7 @@ export class PersonApi extends BaseLoopBackApi {
   public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/count";
+    "/PCitis/count";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -929,13 +598,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
   public updateAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id";
+    "/PCitis/:id";
     let routeParams: any = {
       id: id
     };
@@ -964,7 +633,7 @@ export class PersonApi extends BaseLoopBackApi {
    */
   public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/change-stream";
+    "/PCitis/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
       let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
@@ -977,7 +646,7 @@ export class PersonApi extends BaseLoopBackApi {
     return subject.asObservable();
   }
   /**
-   * Creates a new instance in citi of this model.
+   * Creates a new instance in cips of this model.
    *
    * @param any id PersistedModel id
    *
@@ -991,79 +660,13 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public createManyCiti(id: any, data: Array<any> = undefined): Observable<any> {
+  public createManyCips(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/citi";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in phones of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public createManyPhones(id: any, data: Array<any> = undefined): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/phones";
-    let routeParams: any = {
-      id: id
-    };
-    let postBody: any = {
-      data: data
-    };
-    let urlParams: any = {};
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in emails of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
-   * </em>
-   */
-  public createManyEmails(id: any, data: Array<any> = undefined): Observable<any> {
-    let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People/:id/emails";
+    "/PCitis/:id/cips";
     let routeParams: any = {
       id: id
     };
@@ -1088,29 +691,29 @@ export class PersonApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Person` object.)
+   * This usually means the response is a `PCiti` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined): Observable<Array<Person>> {
+  public createMany(data: Array<any> = undefined): Observable<Array<PCiti>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/People";
+    "/PCitis";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Person>) =>
-        instances.map((instance: Person) => new Person(instance))
+    return result.map((instances: Array<PCiti>) =>
+        instances.map((instance: PCiti) => new PCiti(instance))
     );
   }
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Person`.
+   * i.e. `PCiti`.
    */
   public getModelName() {
-    return "Person";
+    return "PCiti";
   }
 }

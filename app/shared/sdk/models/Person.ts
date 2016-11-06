@@ -1,7 +1,8 @@
 /* tslint:disable */
 import {
   PPhone,
-  PEmail
+  PEmail,
+  PCiti
 } from '../index';
 
 declare var Object: any;
@@ -9,20 +10,22 @@ export interface PersonInterface {
   id: number;
   firstname: string;
   lastname: string;
-  cdate?: any;
   birthdate?: any;
+  cdate?: any;
   phones?: Array<PPhone>;
   emails?: Array<PEmail>;
+  citi?: PCiti;
 }
 
 export class Person implements PersonInterface {
   id: number;
   firstname: string;
   lastname: string;
-  cdate: any;
   birthdate: any;
+  cdate: any;
   phones: Array<PPhone>;
   emails: Array<PEmail>;
+  citi: PCiti;
   constructor(instance?: PersonInterface) {
     Object.assign(this, instance);
   }

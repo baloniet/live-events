@@ -43,11 +43,13 @@ import { UserApi } from './services/custom/User';
 import { PostApi } from './services/custom/Post';
 import { CommuneApi } from './services/custom/Commune';
 import { EducationApi } from './services/custom/Education';
-import { CitizenshipApi } from './services/custom/Citizenship';
-import { StatementApi } from './services/custom/Statement';
-import { PersonApi } from './services/custom/Person';
 import { PPhoneApi } from './services/custom/PPhone';
 import { PEmailApi } from './services/custom/PEmail';
+import { PersonApi } from './services/custom/Person';
+import { CitizenshipApi } from './services/custom/Citizenship';
+import { PCitiApi } from './services/custom/PCiti';
+import { PStatApi } from './services/custom/PStat';
+import { StatementApi } from './services/custom/Statement';
 
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
@@ -69,11 +71,13 @@ export class SDKModule {
         PostApi,
         CommuneApi,
         EducationApi,
-        CitizenshipApi,
-        StatementApi,
-        PersonApi,
         PPhoneApi,
-        PEmailApi
+        PEmailApi,
+        PersonApi,
+        CitizenshipApi,
+        PCitiApi,
+        PStatApi,
+        StatementApi
       ]
     };
   }

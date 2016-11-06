@@ -3,10 +3,12 @@ export * from './User';
 export * from './Post';
 export * from './Commune';
 export * from './Education';
-export * from './Citizenship';
-export * from './Statement';
-export * from './Person';
 export * from './PPhone';
 export * from './PEmail';
+export * from './Person';
+export * from './Citizenship';
+export * from './PCiti';
+export * from './PStat';
+export * from './Statement';
 export * from './BaseModels';
 
