@@ -6,7 +6,7 @@ import { Response } from '@angular/http';
 
 import { LabelService } from '../../../shared/data/label.service';
 import { PersonApi, PCitiApi, PPhoneApi, PEmailApi, CitizenshipApi } from '../../../shared/sdk/services/index';
-import { Person, PPhone, PEmail,PCiti } from '../../../shared/sdk/models/index';
+import { Person, PPhone, PEmail, PCiti } from '../../../shared/sdk/models/index';
 
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -29,7 +29,7 @@ export class PersonForm implements OnInit {
 
     public form: FormGroup;
     private citItems;
-    private citPairs;
+    private citSel = [{ id: 1, text: "Slovensko" }];
 
     //  date = new Date(2016, 5, 10);
     datepickerOpts: any = {
@@ -70,8 +70,7 @@ export class PersonForm implements OnInit {
             email: [''],// BasicValidators.email],
             commune: [],
             post: [],
-            address: [],
-            citizenship: '0'
+            address: []
         });
 
         this._labelService.getLabels('sl', 'person')
@@ -114,7 +113,7 @@ export class PersonForm implements OnInit {
                 .subscribe(
 
                 res => {
-                    
+
                     //2. save mobileNumber
                     if (this.form.controls['mobileNumber'].touched)
                         this._phoneApi.upsert(
@@ -122,7 +121,7 @@ export class PersonForm implements OnInit {
                                 { personId: res.id, numbertype: 1, number: (<any>model).mobileNumber }
                             ))
                             .subscribe(null, res => console.log(res));
-                    
+
                     //3. save email
                     if (this.form.controls['email'].touched)
                         this._emailApi.upsert(
@@ -132,13 +131,13 @@ export class PersonForm implements OnInit {
                             .subscribe(null, res => console.log(res));
 
                     //4. save default citizenship
-                    if (this.form.controls['citizenship'].touched){
+                    if (this.form.controls['citizenship'].touched) {
 
                     } else this._pCitApi.upsert(
-                            new PCiti(
-                                { personId: res.id, citizenshipId:0 }
-                            ))
-                            .subscribe(null, res => console.log(res));
+                        new PCiti(
+                            { personId: res.id, citizenshipId: 0 }
+                        ))
+                        .subscribe(null, res => console.log(res));
 
                     this.form.markAsPristine();
                 },
@@ -152,19 +151,25 @@ export class PersonForm implements OnInit {
 
     }
 
+    //citizenship select box
+    public selected(value: any): void {
+        
+        this.citSel=[{id:value.id,text:value.text}];
+    }
+
     // call service to find model in db
     selectData(param) {
 
         // get citizenship values
         this._citApi.find({ order: "name" }).subscribe(res => {
             this.citItems = [];
-            this.citPairs = [];
+
             for (let one of res) {
-                this.citItems.push({id:one.id,text:one.name});
-                this.citPairs.push({id:one.id,value:one.name});
+                this.citItems.push({ id: one.id, text: one.name });
+
             }
         });
-
+        this.citSel = [{ id: 0, text: "_ni določeno" }]
         if (param.id) {
             // get mobileNumber
             Observable.forkJoin(
@@ -174,11 +179,11 @@ export class PersonForm implements OnInit {
                 this._api.getCiti(param.id)
             ).subscribe(
                 res => {
-console.log('Person',res[3]);
+                    console.log('PersonCiti', res[3]);
                     this.data = res[0];
                     this.phones = res[1];
                     this.emails = res[2];
-                 //   this.citi = res[3];
+                    //this.citi = res[3];
 
                     this.data.mobileNumber = this.phones.length > 0 ? this.phones[0].number : '';
                     this.data.email = this.emails.length > 0 ? this.emails[0].email : '';
@@ -190,8 +195,8 @@ console.log('Person',res[3]);
 
                     (<FormGroup>this.form)
                         .setValue(this.data, { onlySelf: true });
-                }, error=>{
-                    console.log(error,0)
+                }, error => {
+                    console.log(error, 0)
                 }
                 );
         }

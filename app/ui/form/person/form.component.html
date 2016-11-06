@@ -95,11 +95,12 @@
 							<label class="col-md-2 control-label" for="citizenship">{{formLabels?.citizenship?.name}}</label>
 							<div class="col-md-3">
 								<ng-select [allowClear]="true"
-								[initData]="[0]"
+							
               						[items]="citItems"
-              						[disabled]="false"
+              		[active]="citSel"
               						(data)="refreshValue($event)"
               						placeholder="{{formLabels?.citizenship?.placeholder}}"
+						(selected)="selected($event)"			  
 									>
   								</ng-select>
 							</div>
@@ -119,5 +120,5 @@
 </div>
 <pre>{{form.value | json}}</pre><!--
 <pre>{{formLabels | json }} {{form.controls.address.controls.email.hasError('email') | json}}</pre-->
-<pre>{{emails | json}}</pre>
-<pre>{{data | json}}</pre>
+<pre>{{citSel | json}}</pre>
+<pre>{{citizenship | json}}</pre>
