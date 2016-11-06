@@ -14,6 +14,7 @@ import { Person } from '../../models/Person';
 import { PPhone } from '../../models/PPhone';
 import { PEmail } from '../../models/PEmail';
 import { PCiti } from '../../models/PCiti';
+import { PEdu } from '../../models/PEdu';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
@@ -330,6 +331,126 @@ export class PersonApi extends BaseLoopBackApi {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/People/:id/citi";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches hasOne relation edu.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Person` object.)
+   * </em>
+   */
+  public getEdu(id: any, refresh: any = undefined): Observable<any> {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/People/:id/edu";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (refresh) urlParams.refresh = refresh;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in edu of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Person` object.)
+   * </em>
+   */
+  public createEdu(id: any, data: any = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/People/:id/edu";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Update edu of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Person` object.)
+   * </em>
+   */
+  public updateEdu(id: any, data: any = undefined): Observable<any> {
+    let method: string = "PUT";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/People/:id/edu";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Deletes edu of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyEdu(id: any): Observable<any> {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/People/:id/edu";
     let routeParams: any = {
       id: id
     };
@@ -998,6 +1119,39 @@ export class PersonApi extends BaseLoopBackApi {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/People/:id/citi";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in edu of this model.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Person` object.)
+   * </em>
+   */
+  public createManyEdu(id: any, data: Array<any> = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/People/:id/edu";
     let routeParams: any = {
       id: id
     };

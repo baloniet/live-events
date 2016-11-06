@@ -59,6 +59,7 @@
 							</div>
 						</div>
 					</fieldset>
+					<hr>
 
 					<fieldset>
 						<!-- Text input-->
@@ -89,25 +90,29 @@
 							</div>
 						</div>
 					</fieldset>
-
+					<hr>
 					<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-2 control-label" for="citizenship">{{formLabels?.citizenship?.name}}</label>
-							<div class="col-md-3">
-								<ng-select [allowClear]="true"
-							
-              						[items]="citItems"
-              		[active]="citSel"
-              						(data)="refreshValue($event)"
-              						placeholder="{{formLabels?.citizenship?.placeholder}}"
-						(selected)="selected($event)"			  
-									>
-  								</ng-select>
-							</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="citizenship">{{formLabels?.citizenship?.name}}</label>
+						<div class="col-md-3">
+							<ng-select [allowClear]="true" [items]="citItems" [active]="citSel" (data)="refreshValue($event)" placeholder="{{formLabels?.citizenship?.placeholder}}"
+								(selected)="selected($event,'cit')">
+							</ng-select>
 						</div>
 
-					
-				
+
+						<!-- Text input-->
+
+						<label class="col-md-1 control-label" for="education">{{formLabels?.education?.name}}</label>
+						<div class="col-md-3">
+							<ng-select [allowClear]="true" [items]="eduItems" [active]="eduSel" (data)="refreshValue($event)" placeholder="{{formLabels?.education?.placeholder}}"
+								(selected)="selected($event,'edu')">
+							</ng-select>
+						</div>
+					</div>
+
+
+
 					<!-- Form buttons -->
 					<form-button [form]="form" [formTitles]="formTitles" [isDelete]="isDelete" (onBack)="back()" (onSave)="save(form.value)"
 						(onDelete)="delete(form.value)">
@@ -118,7 +123,8 @@
 		</div>
 	</div>
 </div>
-<pre>{{form.value | json}}</pre><!--
+<pre>{{form.value | json}}</pre>
+<!--
 <pre>{{formLabels | json }} {{form.controls.address.controls.email.hasError('email') | json}}</pre-->
-<pre>{{citSel | json}}</pre>
-<pre>{{citizenship | json}}</pre>
+<pre>{{eduSel | json}}</pre>
+<pre>{{eduItems | json}}</pre>

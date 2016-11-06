@@ -2,7 +2,8 @@
 import {
   PPhone,
   PEmail,
-  PCiti
+  PCiti,
+  PEdu
 } from '../index';
 
 declare var Object: any;
@@ -15,6 +16,7 @@ export interface PersonInterface {
   phones?: Array<PPhone>;
   emails?: Array<PEmail>;
   citi?: PCiti;
+  edu?: PEdu;
 }
 
 export class Person implements PersonInterface {
@@ -26,6 +28,7 @@ export class Person implements PersonInterface {
   phones: Array<PPhone>;
   emails: Array<PEmail>;
   citi: PCiti;
+  edu: PEdu;
   constructor(instance?: PersonInterface) {
     Object.assign(this, instance);
   }

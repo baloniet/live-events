@@ -50,6 +50,7 @@ import { CitizenshipApi } from './services/custom/Citizenship';
 import { PCitiApi } from './services/custom/PCiti';
 import { PStatApi } from './services/custom/PStat';
 import { StatementApi } from './services/custom/Statement';
+import { PEduApi } from './services/custom/PEdu';
 
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
@@ -77,7 +78,8 @@ export class SDKModule {
         CitizenshipApi,
         PCitiApi,
         PStatApi,
-        StatementApi
+        StatementApi,
+        PEduApi
       ]
     };
   }

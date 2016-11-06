@@ -50,6 +50,10 @@
     "citizenship": {
       "name": "Državljanstvo",
       "placeholder": "Izberi iz seznama"
+    },
+    "education": {
+      "name": "Izobrazba",
+      "placeholder": "Izberi iz seznama"
     }
   },
   "titles": {

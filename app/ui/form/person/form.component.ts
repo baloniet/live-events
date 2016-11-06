@@ -5,8 +5,9 @@ import { Observable } from 'rxjs/Rx';
 import { Response } from '@angular/http';
 
 import { LabelService } from '../../../shared/data/label.service';
-import { PersonApi, PCitiApi, PPhoneApi, PEmailApi, CitizenshipApi } from '../../../shared/sdk/services/index';
-import { Person, PPhone, PEmail, PCiti } from '../../../shared/sdk/models/index';
+import { PersonApi, PCitiApi, PPhoneApi, PEmailApi, CitizenshipApi, EducationApi, PEduApi }
+    from '../../../shared/sdk/services/index';
+import { Person, PPhone, PEmail, PCiti, PEdu } from '../../../shared/sdk/models/index';
 
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -29,7 +30,9 @@ export class PersonForm implements OnInit {
 
     public form: FormGroup;
     private citItems;
-    private citSel = [{ id: 1, text: "Slovensko" }];
+    private citSel = [{ id: 0, text: "_ni določeno" }];
+    private eduItems;
+    private eduSel = [{ id: 0, text: "_ni določeno" }];
 
     //  date = new Date(2016, 5, 10);
     datepickerOpts: any = {
@@ -50,6 +53,8 @@ export class PersonForm implements OnInit {
         private _route: ActivatedRoute,
         private _api: PersonApi,
         private _pCitApi: PCitiApi,
+        private _pEduApi: PEduApi,
+        private _eduApi: EducationApi,
         private _citApi: CitizenshipApi,
         private _phoneApi: PPhoneApi,
         private _emailApi: PEmailApi,
@@ -130,12 +135,18 @@ export class PersonForm implements OnInit {
                             ))
                             .subscribe(null, res => console.log(res));
 
-                    //4. save default citizenship
-                    if (this.form.controls['citizenship'].touched) {
+                    //4. save citizenship
 
-                    } else this._pCitApi.upsert(
+                    this._pCitApi.upsert(
                         new PCiti(
-                            { personId: res.id, citizenshipId: 0 }
+                            { personId: res.id, citizenshipId: this.citSel[0].id }
+                        ))
+                        .subscribe(null, res => console.log(res));
+
+                    //5. save education
+                    this._pEduApi.upsert(
+                        new PEdu(
+                            { personId: res.id, educationId: this.eduSel[0].id }
                         ))
                         .subscribe(null, res => console.log(res));
 
@@ -152,9 +163,12 @@ export class PersonForm implements OnInit {
     }
 
     //citizenship select box
-    public selected(value: any): void {
-        
-        this.citSel=[{id:value.id,text:value.text}];
+    public selected(value: any, type: string): void {
+        if (type == "cit")
+            this.citSel = [{ id: value.id, text: value.text }];
+        if (type == "edu")
+            this.eduSel = [{ id: value.id, text: value.text }];
+        this.form.markAsDirty();
     }
 
     // call service to find model in db
@@ -169,25 +183,38 @@ export class PersonForm implements OnInit {
 
             }
         });
-        this.citSel = [{ id: 0, text: "_ni določeno" }]
+
+        // get education values
+        this._eduApi.find({ order: "name" }).subscribe(res => {
+            this.eduItems = [];
+
+            for (let one of res) {
+                this.eduItems.push({ id: one.id, text: one.name });
+
+            }
+        });
+
+        this.citSel = [{ id: 0, text: "_ni določeno" }];
+        this.eduSel = [{ id: 0, text: "_ni določeno" }];
+
         if (param.id) {
             // get mobileNumber
             Observable.forkJoin(
                 this._api.findById(param.id),
                 this._api.getPhones(param.id), //filter numbertype=1
                 this._api.getEmails(param.id),  //filter emailtype=1
-                this._api.getCiti(param.id)
+                this._api.getCiti(param.id),
+                this._api.getEdu(param.id)
             ).subscribe(
                 res => {
-                    console.log('PersonCiti', res[3]);
                     this.data = res[0];
                     this.phones = res[1];
                     this.emails = res[2];
-                    //this.citi = res[3];
 
                     this.data.mobileNumber = this.phones.length > 0 ? this.phones[0].number : '';
                     this.data.email = this.emails.length > 0 ? this.emails[0].email : '';
-                    this.data.citizenship = res[3] ? res[3] : '';
+                    this.citSel = res[3] ? this.fromId(this.citItems, res[3].citizenshipId) : '';
+                    this.eduSel = res[4] ? this.fromId(this.eduItems, res[4].educationId) : '';
 
                     this.data.commune = '';
                     this.data.post = '';
@@ -220,4 +247,13 @@ export class PersonForm implements OnInit {
     public refreshValue(value: any): void {
         this.citValue = value;
     }
+
+    private fromId(object: any, value: number): any {
+        for (let o of object) {
+            if (o.id == value)
+                return [{ id: o.id, text: o.text }];
+        }
+        return [{}];
+    }
 }
+

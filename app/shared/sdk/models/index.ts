@@ -10,5 +10,6 @@ export * from './Citizenship';
 export * from './PCiti';
 export * from './PStat';
 export * from './Statement';
+export * from './PEdu';
 export * from './BaseModels';
 
