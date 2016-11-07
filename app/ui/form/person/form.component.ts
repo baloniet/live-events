@@ -10,7 +10,7 @@ import { PersonApi, PCitiApi, PPhoneApi, PEmailApi, CitizenshipApi, EducationApi
 import { Person, PPhone, PEmail, PCiti, PEdu } from '../../../shared/sdk/models/index';
 
 
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -75,7 +75,9 @@ export class PersonForm implements OnInit {
             email: [''],// BasicValidators.email],
             commune: [],
             post: [],
-            address: []
+            addresses: this._fb.array([
+                this.initAddress()
+            ])
         });
 
         this._labelService.getLabels('sl', 'person')
@@ -97,6 +99,26 @@ export class PersonForm implements OnInit {
             });
 
     }
+
+    initAddress() {
+        return this._fb.group({
+            commune: [''],
+            post: [''],
+            address: ['']
+        });
+    }
+
+    addAddress() {
+        const control = <FormArray>this.form.controls['addresses'];
+        control.push(this.initAddress());
+    }
+
+    removeAddress(i: number) {
+        const control = <FormArray>this.form.controls['addresses'];
+        control.removeAt(i);
+    }
+
+
 
     prepareStrings(labels) {
         this.formTitles = labels.titles;

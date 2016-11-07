@@ -45,7 +45,8 @@
     },
     "address": {
       "name": "Naslov",
-      "placeholder": "Naslov"
+      "placeholder": "Naslov",
+      "add": "Dodaj dodatni naslov"
     },
     "citizenship": {
       "name": "Državljanstvo",

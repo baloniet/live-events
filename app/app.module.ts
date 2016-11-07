@@ -1,3 +1,4 @@
+import { AddressComponent } from './ui/form/address/address.component';
 import { SelectModule } from './ui/ng2-select/select.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -56,7 +57,7 @@ import { ValuesPipe, KeysPipe } from './shared/valuesPipe';
     ReactiveFormsModule, ScheduleModule, NKDatetimeModule, SelectModule],
   declarations: [
     AppComponent, NavbarComponent, ProcbarComponent, GenlistComponent, ValuesPipe, KeysPipe, PersonForm, PostForm, 
-    CommuneForm, EducationForm, StatementForm, CitizenshipForm, PersonForm, PersonxForm, ScheduleProxy, FrmBtn, FrmTitle],
+    CommuneForm, EducationForm, StatementForm, CitizenshipForm, PersonForm, PersonxForm, ScheduleProxy, FrmBtn, FrmTitle, AddressComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

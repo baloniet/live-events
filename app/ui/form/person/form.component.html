@@ -59,38 +59,28 @@
 							</div>
 						</div>
 					</fieldset>
-					<hr>
+					
 
-					<fieldset>
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-2 control-label" for="address">{{formLabels?.address?.name}}</label>
-							<div class="col-md-3">
-								<input formControlName="address" type="text" placeholder="{{formLabels?.address?.placeholder}}" class="form-control input-md">
-								<span *ngIf="!isDelete" class="help-block">{{formLabels?.address?.help}}</span>
+					<!--addresses-->
+					<div formArrayName="addresses">
+						<div *ngFor="let address of form.controls.addresses.controls; let i=index" class="panel">
+							<div class="panel-heading">
+								<span>{{formLabels?.address?.name}} </span><span *ngIf="i>0">{{i + 1}}</span>
+								<span class="glyphicon glyphicon-remove pull-right" *ngIf="form.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
 							</div>
-
-						</div>
-					</fieldset>
-
-					<fieldset>
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-2 control-label" for="commune">{{formLabels?.commune?.name}}</label>
-							<div class="col-md-3">
-								<input formControlName="commune" type="text" placeholder="{{formLabels?.commune?.placeholder}}" class="form-control input-md">
-								<span *ngIf="!isDelete" class="help-block">{{formLabels?.commune?.help}}</span>
-							</div>
-
-							<label class="col-md-1 control-label" for="post">{{formLabels?.post?.name}}</label>
-							<div class="col-md-4">
-								<input formControlName="post" type="text" placeholder="{{formLabels?.post?.placeholder}}" class="form-control input-md">
-								<span *ngIf="!isDelete" class="help-block">{{formLabels?.post?.help}}</span>
-								<div *ngIf="form.controls.post.hasError('post') && form.controls.post.touched" class="text-warning">{{formTitles?.post}}</div>
+							<div [formGroupName]="i">
+								<address [group]="form.controls.addresses.controls[i]" [labels]="formLabels"></address>
 							</div>
 						</div>
-					</fieldset>
+					</div>
+					<div class="margin-20">
+						<a (click)="addAddress()" style="cursor: default ">
+							<i class="fa fa-plus"></i> {{formLabels?.address?.add}} 
+         				 </a>
+					</div>
+
 					<hr>
+
 					<!-- Text input-->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="citizenship">{{formLabels?.citizenship?.name}}</label>
