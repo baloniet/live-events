@@ -11,6 +11,14 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
+
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd" name="dp"  ngbDatepicker [dayTemplate]="customDay" [markDisabled]="isDisabled" #d="ngbDatepicker">
+      <div class="input-group-addon" (click)="d.toggle()">
+        <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="exampleSelect1">Example select</label>
       <select class="form-control" id="exampleSelect1">
@@ -72,3 +80,9 @@
 </div>
 <div class="modal-footer">footer
 </div>
+
+<template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+  <span class="custom-day" [class.weekend]="isWeekend(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+    {{ date.day }}
+  </span>
+</template>

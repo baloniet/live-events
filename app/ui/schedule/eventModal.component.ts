@@ -1,13 +1,33 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {Component, Input} from '@angular/core';
 
-import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   moduleId: module.id,
   selector: 'event-modal-content',
-  templateUrl: 'eventModal.content.html'
+  templateUrl: 'eventModal.content.html',
+  styles: [`
+    .custom-day {      
+      text-align: center;
+      padding: 0.185rem 0.25rem;
+      border-radius: 0.25rem;
+      display: inline-block;
+      width: 2rem;
+    }
+    .custom-day:hover {
+      background-color: #e6e6e6;
+    }
+    .weekend {
+      background-color: #f0ad4e;
+      border-radius: 1rem;
+      color: white;
+    }
+    .hidden {
+      display: none;
+    }
+  `]
 })
 export class EventModalContent {
   @Input() name;
@@ -18,6 +38,10 @@ export class EventModalContent {
     this.form = this._formBuilder.group({
 
     });
+  }
+  isWeekend(date: NgbDateStruct) {
+    const d = new Date(date.year, date.month - 1, date.day);
+    return d.getDay() === 0 || d.getDay() === 6;
   }
 }
 
