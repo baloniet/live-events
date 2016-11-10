@@ -1,20 +1,15 @@
+import { EventModalContent } from './eventModal.component';
+import { Schedule } from './schedule.module';
 import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { EventService } from '../../shared/data/event.service';
-import {  ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'schedule',
-    template: `<div class="container"><br>
-        <le-schedule [defaultView]="defaultView" 
-            [events]="events" 
-            [header]="header" 
-            [eventLimit]="8" 
-            [editable]="true" 
-            [nowIndicator]="false"
-            (onDayClick)="handleDayClick($event)"
-	        (onEventClick)="handleEventClick($event)">
-        </le-schedule></div>`,
+    templateUrl: 'schedule.html',
     providers: [EventService]
 })
 export class ScheduleProxy implements OnInit {
@@ -37,27 +32,34 @@ export class ScheduleProxy implements OnInit {
     constructor(
         private _eventService: EventService,
         private _cd: ChangeDetectorRef,
-        private _route: ActivatedRoute)
+        private _route: ActivatedRoute,
+        private _modalService: NgbModal)
     { }
 
     ngOnInit() {
 
         this._route.params
             .subscribe(
-                res =>
-                    (
-                        this.defaultView = res['view'],
-                        console.log(res)
+            res =>
+                (
+                    this.defaultView = res['view'],
+                    console.log(res)
                 )
             );
 
         this.events = this._eventService.getEvents();
         this.header = {
-            left: 'prev, next, today',
+            left: 'prev, next, today myCustomButton',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'//,agendaWeek,agendaDay,listYear,listMonth,listWeek,listDay'		
         };
 
+
+    }
+
+    openModal(value) {
+        const modalRef = this._modalService.open(EventModalContent,{size: "lg"});
+        modalRef.componentInstance.name = value;
     }
 
     handleDayClick(event: any) {
@@ -66,22 +68,22 @@ export class ScheduleProxy implements OnInit {
 
         this.event = new MyEvent();
         this.event.start = event.date.format();
-    
-        
+
+
 
         this.dialogVisible = true;
 
         // TODO tu bi lahko bil if da se ne bi spodnje zgodilo če je že agendaDay
         event.view.calendar.gotoDate(event.date);
-        event.view.calendar.changeView('agendaDay');
-        
+     //   event.view.calendar.changeView('agendaDay');
+
 
         //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
         this._cd.detectChanges();
 
-        console.log( event.view.calendar);
+        this.openModal(this.event);
+        console.log('day clicked' + JSON.stringify(this.event));
 
-        
     }
 
     handleEventClick(e: any) {
@@ -105,7 +107,9 @@ export class ScheduleProxy implements OnInit {
         this.event.allDay = e.calEvent.allDay;
         this.dialogVisible = true;
 
-         console.log('event clicked'  + JSON.stringify(this.event));
+
+        console.log('event clicked' + JSON.stringify(this.event));
+
     }
 
     saveEvent() {

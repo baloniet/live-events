@@ -1,8 +1,10 @@
+import { EventModalComponent, EventModalContent } from './ui/schedule/eventModal.component';
 import { AddressComponent } from './ui/form/address/address.component';
 import { SelectModule } from './ui/ng2-select/select.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 
@@ -50,14 +52,15 @@ import { ValuesPipe, KeysPipe } from './shared/valuesPipe';
       { path: 'form/citizenship/:id/:action', component: CitizenshipForm },
       { path: 'form/citizenship', component: CitizenshipForm },
       { path: 'form/person/:id/:action', component: PersonForm },
-      { path: 'form/person', component: PersonForm },      
+      { path: 'form/person', component: PersonForm },
       { path: 'schedule/:view', component: ScheduleProxy },
       { path: '', component: ProcbarComponent },
-    ]), SDKModule.forRoot(),
+    ]), SDKModule.forRoot(), NgbModule.forRoot(),
     ReactiveFormsModule, ScheduleModule, NKDatetimeModule, SelectModule],
   declarations: [
-    AppComponent, NavbarComponent, ProcbarComponent, GenlistComponent, ValuesPipe, KeysPipe, PersonForm, PostForm, 
-    CommuneForm, EducationForm, StatementForm, CitizenshipForm, PersonForm, PersonxForm, ScheduleProxy, FrmBtn, FrmTitle, AddressComponent],
+    AppComponent, NavbarComponent, ProcbarComponent, GenlistComponent, ValuesPipe, KeysPipe, PersonForm, PostForm,
+    CommuneForm, EducationForm, StatementForm, CitizenshipForm, PersonForm, PersonxForm, ScheduleProxy, FrmBtn, FrmTitle, AddressComponent, EventModalContent, EventModalComponent],
+  entryComponents: [EventModalContent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
